@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <title>Cupcakes</title>
+  </head>
+  <body>
+    <h3 class="text-center">Available Cupcakes</h3>
+    <div class="container">
+      <div class="row">
+        {% for cupcake in cupcakes %}
+        <div class="col-sm-6 col-md-4 col-lg-3 parent">
+          <div class="m-3 text-center">
+            {{ cupcake.flavor }} <br />
+            <a href="/api/cupcakes/{{cupcake.id}}">
+              <img
+                src="{{ cupcake.image }}"
+                style="width: 150px; height: 150px; object-fit: contain"
+              />
+            </a>
+            <div>{{cupcake.size }}</div>
+            <div>{{cupcake.rating}}</div>
+            <div>
+              <button
+                class="delete-cupcake btn-sm btn-danger"
+                data-id="{{cupcake.id}}"
+              >
+                DELETE
+              </button>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    <!-- END OF DISPLAY SECTION &&&&&  BEGINNING OF FORM SECTION  -->
+    <h3 class="text-center">Add A New Cupcake</h3>
+    <div class="container text-center">
+      <form
+        class="d-flex flex-column align-items-center border border-primary rounded mb-5"
+        id="cupcake-form"
+      >
+        <div class="form-group">
+          <label for="flavor">Flavor</label>
+          <input
+            type="text"
+            class="form-control"
+            id="flavor"
+            placeholder="flavor"
+            name="flavor"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label>Size</label>
+          <div>
+            <label class="mr-2"
+              ><input type="radio" name="size" value="small" /> Small</label
+            >
+            <label
+              ><input type="radio" name="size" value="medium" /> Medium</label
+            >
+            <label
+              ><input type="radio" name="size" value="large" /> Large</label
+            >
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="rating">Rating</label>
+          <input
+            type="number"
+            class="form-control"
+            id="rating"
+            min="1"
+            max="10"
+            name="rating"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="imageUrl">Image URL</label>
+          <input type="url" class="form-control" id="imageUrl" name="image" />
+        </div>
+
+        <button type="submit" class="btn btn-primary mb-3">Submit</button>
+      </form>
+    </div>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"
+      integrity="sha256-T/f7Sju1ZfNNfBh7skWn0idlCBcI3RwdLSS4/I7NQKQ="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
+    <script src="static/app.js"></script>
+  </body>
+</html>
